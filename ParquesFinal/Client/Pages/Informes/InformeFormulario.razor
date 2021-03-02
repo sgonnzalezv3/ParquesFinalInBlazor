@@ -1,0 +1,40 @@
+﻿<EditForm Model="ActividadIlicita" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="m-5">
+        <h1 class="principal mb-0 my-0">ACTIVIDAD ILICITA</h1>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Tipo de Actividad Ilicita:</label>
+                <div>
+                    <InputText class="form-control" @bind-Value="@ActividadIlicita.TipoActividadIlicita" placeholder="Escriba el tipo de actividad ilicita" />
+                    <ValidationMessage For="@(() => ActividadIlicita.TipoActividadIlicita)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Fecha del Suceso:</label>
+                <div>
+                    <InputDate class="form-control" @bind-Value="@ActividadIlicita.Fecha" />
+                    <ValidationMessage For="@(() => ActividadIlicita.Fecha)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Describa el Suceso:</label>
+                <div>
+                    <InputTextArea class="form-control" @bind-Value="@ActividadIlicita.Descripcion" placeholder="Escriba lo ocurrido" />
+                    <ValidationMessage For="@(() => ActividadIlicita.Descripcion)" />
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"> Guardar Cambios </button>
+    </div>
+</EditForm>
+@code {
+    [Parameter] public ActividadIlicita ActividadIlicita { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+   // [Parameter] public Parque Parque { get; set; }
+
+}

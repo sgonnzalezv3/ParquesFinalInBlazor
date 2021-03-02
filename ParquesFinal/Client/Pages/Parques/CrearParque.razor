@@ -1,0 +1,95 @@
+﻿@page "/parque/crear"
+@inject IRepositorio repositorio
+@inject NavigationManager navigatioManager
+
+<EditForm Model="Parque" OnValidSubmit="Crear">
+    <DataAnnotationsValidator/>
+    <div class="m-5">
+        <h1 class="principal mb-0 my-0">CREAR PARQUES</h1>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Nombre del Parque:</label>
+                <div>
+                    <InputText class="form-control" @bind-Value="@Parque.Nombre" placeholder="Escriba el nombre del Parque"/>
+                    <ValidationMessage For="@(() => Parque.Nombre)" />
+                </div>
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="form-group">
+                <label> Extensión:</label>
+                <div>
+                    <InputText class="form-control" @bind-Value="@Parque.Extension" placeholder="Escriba la Extensión del Parque"/>
+                    <ValidationMessage For="@(() => Parque.Extension)" />
+                </div>
+            </div>
+        </div>    
+        <div class="form-group">
+            <div class="form-group">
+                <label> Region:</label>
+                <div>
+                    <InputText class="form-control" @bind-Value="@Parque.Region" placeholder="Escriba la Región del Parque"/>
+                    <ValidationMessage For="@(() => Parque.Region)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Fecha de Creación:</label>
+                <div>
+                    <InputDate class="form-control" @bind-Value="@Parque.FechaCreacion" />
+                    <ValidationMessage For="@(() => Parque.FechaCreacion)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Car Perteneciente:</label>
+                <div>
+                    <InputNumber class="form-control" @bind-Value="@Parque.CarId" placeholder="Digite la Id de la Car Perteneciente"/>
+                    <ValidationMessage For="@(() => Parque.CarId)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <InmputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenTemporal="" />
+        </div>
+        <button class="btn btn-success" type="submit"> Guardar Cambios </button>
+    </div>
+</EditForm>
+
+@code {
+
+    private Parque Parque = new Parque();
+    private string imagenTemporal;
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrWhiteSpace(Parque.Img))
+        {
+            imagenTemporal = Parque.Img;
+            Parque.Img = null;
+        }
+    }
+    private void ImagenSeleccionada(string imagenBase64)
+    {
+        Parque.Img = imagenBase64;
+    }
+
+
+    async Task Crear()
+    {
+
+        var httpResponse = await repositorio.Post("api/parques", Parque);
+        if (httpResponse.Error)
+        {
+
+            var body = await httpResponse.HttpResponseMessage.Content.ReadAsStringAsync();
+            Console.WriteLine(body);
+        }
+        else
+        {
+            Console.WriteLine("loka");
+            navigatioManager.NavigateTo("/parque");
+        }
+    }
+}

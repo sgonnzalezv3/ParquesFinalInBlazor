@@ -1,0 +1,48 @@
+﻿@page "/login"
+@inject IRepositorio repositorio
+@inject NavigationManager navigationManager
+@inject ILoginService loginService
+
+@using ParquesFinal.Client.Auth
+
+<h1 class="principal mb-0 my-0">Inicio De Sesión</h1>
+
+<EditForm Model="userInfo" OnValidSubmit="LoginUsuario">
+    <DataAnnotationsValidator />
+    <div class="m-5 p-5">
+        <div class="form-group">
+            <label>Email:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@userInfo.Email" placeholder="Ingrese su correo" />
+                <ValidationMessage For="@(() => userInfo.Email)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <div>
+                <InputPassword class="form-control" @bind-Value="@userInfo.Password" placeholder="Ingrese su contraseña"  />
+                <ValidationMessage For="@(() => userInfo.Password)" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+    </div>
+
+</EditForm>
+
+@code {
+    private UserInfo userInfo = new UserInfo();
+    private async Task LoginUsuario()
+    {
+        var httpResponse = await repositorio.Post<UserInfo, UserToken>("api/cuentas/login", userInfo);
+        if (httpResponse.Error)
+        {
+
+        }
+        else
+        {
+            await loginService.Login(httpResponse.Response.Token);
+            navigationManager.NavigateTo("");
+        }
+    }
+
+}

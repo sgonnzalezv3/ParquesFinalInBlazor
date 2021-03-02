@@ -1,0 +1,104 @@
+﻿@page "/"
+@attribute [Authorize]
+@attribute [AllowAnonymous]
+
+
+    <h1 class="principal mb-0 my-0">PARQUES NATURALES</h1>
+    <section class="container-fluid mb-0 my-0 px-xs-0">
+        <div class="row">
+            <div class=" p- col-xs-12 col-sm-12 col-12 col-lg-12 px-lg-12 px-sm-0 px-0 d-block">
+                <NavLink class="nav-link px-0 p-0" href="Parque" Match="NavLinkMatch.All">
+                    <img class="d-block w-100" src="https://www.parquesnacionales.gov.co/portal/wp-content/uploads/2020/10/gorgona-diego-grajales.jpg">
+                    <div class="carousel-caption d-none d-sm-block">
+                        <p class="textosubCampo1">|PARQUES|</p>
+                        <h3 class="camp">MIRA TODOS NUESTROS PARQUES</h3>
+                    </div>
+                </NavLink>
+                <p class="textosubCampo my-0 d-lg-none d-sm-none">|Parques|</p>
+                <NavLink class="nav-link px-0 p-0 d-lg-none d-sm-none" href="Counter" Match="NavLinkMatch.All">
+                    <p class="textoCampo ">Mira nuestra gran cantidad de parques disponibles por todo el pais</p>
+                </NavLink>
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid mb-0 my-0 px-xs-0 mt-5">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-12 col-lg-7 px-lg-5 px-sm-0 px-0">
+                <NavLink class="nav-link px-0 p-0" href="Counter" Match="NavLinkMatch.All">
+                    <img class="d-block w-100" src="https://www.parquesnacionales.gov.co/portal/wp-content/uploads/2013/08/ALTO_FRAGUA_INDI_WASI_10_Arleth_Gonzalez_Perez.jpg">
+                </NavLink>
+                <p class="textosubCampo my-0">|Fauna y Flora|</p>
+                <NavLink class="nav-link px-0 p-0" href="Counter" Match="NavLinkMatch.All">
+                    <p class="textoCampo ">Mira la gran variedad de Fauna y Flora</p>
+                </NavLink>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-5 my-0 px-sm-0 px-lg-5 px-0 mt-3">
+                <NavLink class="nav-link px-0 p-0" href="Counter" Match="NavLinkMatch.All">
+                    <img class="d-block w-100" src="https://media-cdn.tripadvisor.com/media/photo-s/10/6f/2e/29/opcion-de-alojamiento.jpg">
+                </NavLink>
+                <p class="textosubCampo m-0">|Reservas|</p>
+                <NavLink class="nav-link px-0 p-0" href="Counter" Match="NavLinkMatch.All">
+                    <p class="textoCampo">Realiza reservas en nuestros parques disponibles</p>
+                </NavLink>
+            </div>
+        </div>
+    </section>
+    <h2 class="principal">PRECIOS DE ENTRADA</h2>
+    <section class="mb-5 my-5 bg-dark">
+        <img class="d-block w-100" src="https://www.parquesnacionales.gov.co/portal/wp-content/uploads/2018/11/Valores-Ingreso-Parques-2020-01-1.jpg">
+    </section>
+    <!-- Footer -->
+    <footer class="page-footer font-small cyan darken-3">
+
+        <!-- Footer Elements -->
+        <div class="container">
+
+            <!-- Grid row-->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-12 py-5">
+                    <div class="mb-5 flex-center">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Google +-->
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Pinterest-->
+                        <a class="pin-ic">
+                            <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+        <!-- Footer Elements -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href="https://www.minambiente.gov.co/"> MinAmbiente</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->

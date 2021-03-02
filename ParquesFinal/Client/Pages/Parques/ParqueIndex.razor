@@ -1,0 +1,26 @@
+﻿@page "/parque"
+@inject IRepositorio repositorio
+<h1 class="principal mb-0 my-0">PARQUES NATURALES</h1>
+<AuthorizeView>
+    <Authorized>
+        <div class="form-group">
+            <a class="btn btn-info" href="parque/crear">Agregar Parques</a>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
+<div style="display:flex;flex-wrap:wrap; align-items:center">
+    <ListadoGenerico Listado="Parques">
+        <HayRegistros Context="parque">
+            <EstiloParquePrincipal Parque="parque" />
+        </HayRegistros>
+    </ListadoGenerico>
+</div>
+@code {
+    public List<Parque> Parques { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await repositorio.Get<List<Parque>>("api/parques");
+        Parques = responseHttp.Response;
+    }
+}

@@ -1,0 +1,29 @@
+﻿<EditForm Model="Car" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="m-5">
+        <h1 class="principal mb-0 my-0">CREAR CORPORACION</h1>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Nombre de la Corporación:</label>
+                <div>
+                    <InputText class="form-control" @bind-Value="@Car.Nombre" placeholder="Escriba el nombre de la Corporación" />
+                    <ValidationMessage For="@(() => Car.Nombre)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Fecha de Creación de la Corporación:</label>
+                <div>
+                    <InputDate class="form-control" @bind-Value="@Car.FCreacion" />
+                    <ValidationMessage For="@(() => Car.FCreacion)" />
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"> Guardar Cambios </button>
+    </div>
+</EditForm>
+@code {
+    [Parameter] public Car Car { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

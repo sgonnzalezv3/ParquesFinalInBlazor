@@ -1,0 +1,19 @@
+﻿@inject IJSRuntime js
+
+<div style="display: flex; flex-wrap:wrap; align-items:center;">
+    <ListadoGenerico Listado="Parques">
+        <HayRegistros Context="parque">
+        </HayRegistros>
+    </ListadoGenerico>
+</div>
+@code {
+
+
+
+    [Parameter] public List<Parque> Parques { get; set; }
+
+        protected override void OnInitialized()
+        {
+           // Parques = Repositorio.ObtenerParques();
+        }
+}

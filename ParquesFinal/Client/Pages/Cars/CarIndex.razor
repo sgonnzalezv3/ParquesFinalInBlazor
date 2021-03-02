@@ -1,0 +1,53 @@
+﻿@page "/car"
+@inject IRepositorio repositorio
+
+<h1 class="principal mb-0 my-0">CORPORACIONES AUTÓNOMAS REGIONALES</h1>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="form-group">
+            <a class="btn btn-info" href="car/crear">Agregar CAR</a>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
+<ListadoGenerico Listado="Car">
+    <HayRegistrosCompleto>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Car)
+                {
+                    <tr>
+                        <td>
+                            <AuthorizeView>
+                                <Authorized>
+                                    <a class="btn btn-success" href="car/editar">Editar</a>
+                                    <button class="btn btn-danger"> Deshabilitar</button>
+                                </Authorized>
+                            </AuthorizeView>
+
+                        </td>
+                        <td>@item.Nombre</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </HayRegistrosCompleto>
+
+</ListadoGenerico>
+
+@code {
+    public List<Car> Car { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await repositorio.Get<List<Car>>("api/car");
+        Car = responseHttp.Response;
+    }
+
+}

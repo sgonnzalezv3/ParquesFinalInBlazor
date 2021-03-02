@@ -1,0 +1,60 @@
+﻿@page  "/informe"
+
+@inject IRepositorio repositorio
+
+<h1 class="principal mb-0 my-0">INFORMES DE ACTIVIDAD</h1>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="form-group">
+            <a class="btn btn-info" href="informe/crear">Crear Informe de Ilicitos</a>
+        </div>
+    </Authorized>
+</AuthorizeView><AuthorizeView>
+    <Authorized>
+        <div class="form-group">
+            <a class="btn btn-info" href="informe/crear">Consultar Registros de Visitantes</a>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
+<ListadoGenerico Listado="ActividadIlicita">
+    <HayRegistrosCompleto>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ActividadIlicita)
+                {
+                    <tr>
+                        <td>
+                            <AuthorizeView>
+                                <Authorized>
+                                    <a class="btn btn-success" href="">Editar</a>
+                                    <button class="btn btn-danger"> Deshabilitar</button>
+                                </Authorized>
+                            </AuthorizeView>
+
+                        </td>
+                        <td>@item.TipoActividadIlicita</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </HayRegistrosCompleto>
+
+</ListadoGenerico>
+
+@code {
+    public List<ActividadIlicita> ActividadIlicita  { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await repositorio.Get<List<ActividadIlicita>>("api/informes");
+        ActividadIlicita = responseHttp.Response;
+    }
+
+}

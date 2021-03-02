@@ -1,0 +1,80 @@
+﻿@page "/parque/{ParqueId:int}"
+@page "/parque/{ParqueId:int}/{NombreParque}"
+@inject IRepositorio repositorio
+@inject NavigationManager navigationManager
+@using ParquesFinal.Shared.DTOs
+
+
+
+
+@if (model == null)
+{
+    <text>Cagando... </text>
+}
+else
+{
+    <h1 class="principal mb-0 my-0">PARQUE @model.Nombre.ToUpper() (@model.FechaCreacion.Value.ToString("yyyy"))</h1>
+    <div class="row principal container-fluid mb-0 my-0 px-xs-0 p-0 text-left" style="font-size:3rem">
+        <div class="col text-left">
+            @model.Region
+        </div>
+        <div class="col">
+            <AuthorizeView>
+                <Authorized>
+                    <a href="/parque/crear/alojamiento" class="btn btn-info">Agregar Habitación</a>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+        <div class="col">
+            <button class="btn btn-info"> Realiza una Reserva</button>
+        </div>
+    </div>
+    <section class="container-fluid mb-0 my-0 px-xs-0 p-0" >
+        <img class="w-100" src="@model.Img" alt="" />
+    </section>
+    <section class="container-fluid mb-0 my-0 px-xs-0 mt-5">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-12 col-lg-4 px-lg-5 px-sm-0 px-0 text-left" style="font-size:2rem">
+                <h3> Nombre : @NombreParque</h3>
+                <h3> Identificacion del Parque : @ParqueId</h3>
+                <h3> Extensión : @model.Extension</h3>
+                <h3> Región : @model.Region</h3>
+                <h3> Identificación de la CAR: @model.CarId</h3>
+                
+          
+            </div>
+            <div>
+                <SeleccionMultiple>
+
+                </SeleccionMultiple>
+            </div>
+        </div>
+    </section>
+
+}
+
+
+
+
+@code {
+    [Parameter] public int ParqueId { get; set; }
+    [Parameter] public string NombreParque { get; set; }
+    [Parameter] public List<Ecosistema> EcosistemasSeleccionados { get; set; } = new List<Ecosistema>();
+    [Parameter] public List<Ecosistema> EcosistemasNoSeleccionados { get; set; } = new List<Ecosistema>();
+    private List<SelectorMultipleModel> Seleccionados { get; set; } = new List<SelectorMultipleModel>();
+    private List<SelectorMultipleModel> NoSeleccionados { get; set; } = new List<SelectorMultipleModel>();
+    private Parque model { get; set; }
+
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Seleccionados = EcosistemasSeleccionados.Select(X => new SelectorMultipleModel(X.Id.ToString(), X.Nombre)).ToList();
+        NoSeleccionados = EcosistemasNoSeleccionados.Select(X => new SelectorMultipleModel(X.Id.ToString(), X.Nombre)).ToList();
+        var responseHttp = await repositorio.Get<Parque>($"api/parques/{ParqueId}");
+        model = responseHttp.Response;
+    }
+
+}

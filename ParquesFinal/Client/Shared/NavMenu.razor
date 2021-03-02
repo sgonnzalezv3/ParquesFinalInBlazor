@@ -1,0 +1,92 @@
+﻿@attribute [Authorize]
+
+<div class="container-fluid top-row p-0 m-0 navbar navbar-dark">
+    <div class="d-none d-sm-none d-lg d-md-flex">
+        <NavLink class="nav-link p-0" href="" Match="NavLinkMatch.All">
+            <img class=" container-fluid w-100 p-0" src="https://www.parquesnacionales.gov.co/portal/wp-content/themes/pnn/images/LogoMinambientePNG.png">
+        </NavLink>
+    </div>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="iconify" data-icon="mdi:home" data-inline="false" data-width="32" data-height="32"></span> Principal
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="parque">
+                <span class="iconify" data-icon="mdi:pine-tree" aria-hidden="true" data-inline="false" data-width="32" data-height="32"></span> Parques
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="reserva">
+                <span class="iconify" data-icon="mdi:clipboard-edit" data-inline="false" data-width="32" data-height="32"></span> Reservas
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="CAR">
+                <span class="iconify" data-icon="mdi:card-account-details-outline" data-inline="false" data-width="32" data-height="32"></span> CAR
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="Informe">
+                <span class="iconify" data-icon="mdi:calendar-alert" data-inline="false" data-width="32" data-height="32"></span> Informes
+            </NavLink>
+        </li>
+       <AuthorizeView>
+           <NotAuthorized>
+               <li class="nav-item px-3">
+                   <NavLink class="nav-link" href="login">
+                       <span class="iconify" data-icon="mdi:login-variant" data-inline="false" data-width="32" data-height="32"></span> Iniciar Sesión
+                   </NavLink>
+               </li>
+           </NotAuthorized>
+       </AuthorizeView> 
+        <AuthorizeView>
+           <NotAuthorized>
+               <li class="nav-item px-3">
+                   <NavLink class="nav-link" href="registro">
+                       <span class="iconify" data-icon="mdi:login-variant" data-inline="false" data-width="32" data-height="32"></span> Registrate
+                   </NavLink>
+               </li>
+           </NotAuthorized>
+       </AuthorizeView>
+
+        <li class="nav-item px-3">
+            <AuthorizeView>
+                <Authorized>
+                    <NavLink class="nav-link" href="">
+                        <span class="iconify" data-icon="mdi:account" data-inline="false" data-width="32" data-height="32"></span>@context.User.Identity.Name
+                    </NavLink>
+                </Authorized>
+            </AuthorizeView>
+        </li>    
+        <li class="nav-item px-3">
+            <AuthorizeView>
+                <Authorized>
+                    <NavLink class="nav-link" href="logout">
+                        <span class="iconify" data-icon="mdi:login-variant" data-inline="false" data-width="32" data-height="32"></span> Cerrar Sesion
+                    </NavLink>
+                </Authorized>
+            </AuthorizeView>
+        </li>
+
+
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

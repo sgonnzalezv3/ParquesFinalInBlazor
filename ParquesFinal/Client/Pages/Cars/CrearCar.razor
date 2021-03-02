@@ -1,0 +1,26 @@
+﻿@page "/car/crear"
+@inject IRepositorio repositorio
+@inject NavigationManager navigatioManager
+
+<CarFormCrear OnValidSubmit="Crear" Car="Car"/>
+
+@code {
+    private Car Car = new Car();
+
+    async Task Crear()
+    {
+        var httpResponse = await repositorio.Post("api/car", Car);
+        if (httpResponse.Error)
+        {
+
+            var body = await httpResponse.HttpResponseMessage.Content.ReadAsStringAsync();
+            Console.WriteLine(body);
+        }
+        else
+        {
+            Console.WriteLine("ok");
+            navigatioManager.NavigateTo("/car");
+        }
+    }
+
+}

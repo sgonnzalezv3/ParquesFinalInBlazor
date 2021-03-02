@@ -1,0 +1,15 @@
+﻿@page "/car/editar/{carId:int}"
+<h3>EditarParque</h3>
+
+@code {
+    [Parameter] public int CarId { get; set; }
+    private Car Car;
+    protected override void OnInitialized()
+    {
+        Car = new Car() { Id = CarId, Nombre = "Messias" };
+    }
+    private void Editar()
+    {
+        Console.WriteLine("editando");
+    }
+}

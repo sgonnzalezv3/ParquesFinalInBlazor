@@ -1,0 +1,14 @@
+﻿.camp {
+    font-weight: 600;
+    text-align: left;
+    font-size: 500%;
+    font-family: 'Dosis', sans-serif;
+    color: black;
+}
+
+    .camp:hover {
+        color: #D3D9F2;
+        transition-property: all;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in;
+    }

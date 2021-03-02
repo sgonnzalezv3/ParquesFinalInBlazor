@@ -1,0 +1,47 @@
+﻿<EditForm Model="ZonaAlojamiento" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="m-5">
+        <h1 class="principal mb-0 my-0">Agregar Habitación</h1>
+        <div class="form-group">
+            <div class="form-group">
+                <label> Ingrese Id del parque al cual va ingresar la Habitación:</label>
+                <div>
+                    <InputNumber class="form-control" @bind-Value="@ZonaAlojamiento.ParqueId" placeholder="Escriba el tipo de Habitación" />
+                    <ValidationMessage For="@(() => ZonaAlojamiento.ParqueId)" />
+                </div>
+            </div>
+        </div>     
+        <div class="form-group">
+            <div class="form-group">
+                <label> Tipo Habitación:</label>
+                <div>
+                    <InputText class="form-control" @bind-Value="@ZonaAlojamiento.Tipo" placeholder="Escriba el tipo de Habitación" />
+                    <ValidationMessage For="@(() => ZonaAlojamiento.Tipo)" />
+                </div>
+            </div>
+        </div>      
+        <div class="form-group">
+            <div class="form-group">
+                <label> Costo:</label>
+                <div>
+                    <InputNumber class="form-control" @bind-Value="@ZonaAlojamiento.Costo" placeholder="Escriba el costo por persona" />
+                    <ValidationMessage For="@(() => ZonaAlojamiento.Costo)" />
+                </div>
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="form-group">
+                <label> Capacidad:</label>
+                <div>
+                    <InputNumber class="form-control" @bind-Value="@ZonaAlojamiento.Capacidad" placeholder="Escriba la capacidad de la Habitación" />
+                    <ValidationMessage For="@(() => ZonaAlojamiento.Capacidad)" />
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"> Guardar Cambios </button>
+    </div>
+</EditForm>
+@code {
+    [Parameter] public ZonaAlojamiento ZonaAlojamiento { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

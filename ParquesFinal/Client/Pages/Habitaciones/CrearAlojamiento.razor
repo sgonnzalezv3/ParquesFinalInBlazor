@@ -1,0 +1,26 @@
+﻿@page "/parque/crear/Alojamiento"
+@inject IRepositorio repositorio
+@inject NavigationManager navigatioManager
+
+<HabitaciónFormCrear OnValidSubmit="Crear" ZonaAlojamiento="ZonaAlojamiento" />
+
+@code {
+    private ZonaAlojamiento ZonaAlojamiento = new ZonaAlojamiento();
+
+    async Task Crear()
+    {
+        var httpResponse = await repositorio.Post("api/habitaciones", ZonaAlojamiento);
+        if (httpResponse.Error)
+        {
+
+            var body = await httpResponse.HttpResponseMessage.Content.ReadAsStringAsync();
+            Console.WriteLine(body);
+        }
+        else
+        {
+            Console.WriteLine("ok");
+            navigatioManager.NavigateTo("/parque");
+        }
+    }
+
+}
